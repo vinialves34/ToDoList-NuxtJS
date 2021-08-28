@@ -2,7 +2,7 @@
   <section class="container mx-auto">
     <div class="flex flex-row justify-around items-center h-screen">
       <div class="pl-14">
-        <img class="h-96" :src="artLogin" alt="art_login">
+        <img class="h-96" src="~/assets/images/selection_list.svg" alt="art_login">
       </div>
       <div class="pr-14">
         <Login/>
@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      artLogin: null
+      artLogin: ""
     }
   },
   created: function() {
@@ -24,8 +24,11 @@ export default {
   methods: {
     randomArt: function() {
       let arts = [
-        "/_nuxt/assets/images/art_login.svg",
-        "/_nuxt/assets/images/to_do_list.svg"
+        '~/assets/images/complete_task.svg',
+        '~/assets/images/to_do_list.svg',
+        '~/assets/images/list.svg',
+        '~/assets/images/selection_list.svg',
+        '~/assets/images/task_list.svg',
       ];
 
       this.artLogin = arts[Math.floor(Math.random()*arts.length)];

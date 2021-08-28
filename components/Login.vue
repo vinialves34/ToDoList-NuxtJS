@@ -7,13 +7,13 @@
     <div class="p-5 flex justify-center flex-col">
       <input
         v-model="username"
-        class="form-input px-3 py-2 rounded focus:outline-none focus:ring-1 focus:border-blue-300"
+        class="form-input border-gray-300 shadow-md px-3 py-2 rounded focus:outline-none focus:ring-1 focus:border-blue-300"
         type="text" name="username" id="username"
         placeholder="Digite seu nome"
       >
 
       <button @click="printUsername()"
-        class="bg-green-400 text-white font-bold py-2 px-4 rounded mt-5"
+        class="bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mt-5"
         id="submit-username">Começar
       </button>
     </div>
