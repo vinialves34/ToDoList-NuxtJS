@@ -1,10 +1,10 @@
 <template>
   <section class="container mx-auto">
-    <div class="flex flex-row justify-around items-center h-screen">
-      <div class="pl-14">
-        <img class="h-96" :src="artLogin" alt="art_login">
+    <div class="flex flex-col md:flex-row justify-center md:justify-around items-center h-screen">
+      <div class="md:pl-14">
+        <img class="h-56 md:h-96" :src="artLogin" alt="art_login">
       </div>
-      <div class="pr-14">
+      <div class="mb-5 md:pr-14">
         <Login/>
       </div>
     </div>

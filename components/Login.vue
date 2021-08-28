@@ -1,7 +1,7 @@
 <template>
-  <div class="w-max rounded-2xl border-solid shadow-lg">
+  <div class="w-screen md:w-max rounded-2xl border-solid shadow-lg">
     <div id="title" class="bg-green-400 rounded-t-2xl">
-      <h1 class="text-center text-4xl text-white p-10 italic">Your To-Do List</h1>
+      <h1 class="text-center text-2xl md:text-4xl text-white p-10 italic">Your To-Do List</h1>
     </div>
 
     <div class="p-5 flex justify-center flex-col">
