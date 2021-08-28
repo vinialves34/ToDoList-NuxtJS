@@ -1,10 +1,10 @@
 <template>
   <section class="container mx-auto">
-    <div class="flex flex-row justify-around items-center h-screen">
-      <div class="pl-14">
-        <img class="h-96" :src="artLogin" alt="art_login">
+    <div class="flex flex-col md:flex-row justify-center md:justify-around items-center h-screen">
+      <div class="md:pl-14">
+        <img class="h-56 md:h-96" :src="artLogin" alt="art_login">
       </div>
-      <div class="pr-14">
+      <div class="mb-5 md:pr-14">
         <Login/>
       </div>
     </div>
@@ -22,10 +22,13 @@ export default {
     this.randomArt();
   },
   methods: {
-    randomArt: function() {
+    randomArt() {
       let arts = [
-        "/_nuxt/assets/images/art_login.svg",
-        "/_nuxt/assets/images/to_do_list.svg"
+        require('~/assets/images/complete_task.svg'),
+        require('~/assets/images/to_do_list.svg'),
+        require('~/assets/images/list.svg'),
+        require('~/assets/images/selection_list.svg'),
+        require('~/assets/images/task_list.svg'),
       ];
 
       this.artLogin = arts[Math.floor(Math.random()*arts.length)];
