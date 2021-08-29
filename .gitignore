@@ -91,3 +91,5 @@ sw.*
 
 # Test Cypress
 cypress
+
+.vercel
