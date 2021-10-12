@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     createList() {
-      if (!this.titleList) {
+      if (!this.titleList.trim()) {
         Swal.fire({
           icon: 'info',
           title: 'Informação',
@@ -63,8 +63,8 @@ export default {
       }
 
       let data = {
-        "title": this.titleList,
-        "description": this.descriptionList
+        "title": this.titleList.trim(),
+        "description": this.descriptionList.trim()
       }
 
       this.$store.dispatch('createList', JSON.stringify(data));

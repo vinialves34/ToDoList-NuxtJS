@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     addItem(cardUuid) {
-      if (!this.textItem) {
+      if (!this.textItem.trim()) {
         Swal.fire({
           icon: 'info',
           title: 'Informação',
@@ -73,7 +73,7 @@ export default {
 
       let dataItem = {
         "cardUuid": cardUuid,
-        "text": this.textItem
+        "text": this.textItem.trim()
       }
 
       this.$store.dispatch('createItem', JSON.stringify(dataItem));
