@@ -40,6 +40,11 @@ export default {
           confirmButtonColor: '#34d399'
         });
       } else {
+        localStorage.setItem('user-guess', this.username);
+        if (!localStorage.getItem('list')) {
+          localStorage.setItem('list', JSON.stringify([]));
+        }
+
         this.$router.push('/your-list');
       }
     }

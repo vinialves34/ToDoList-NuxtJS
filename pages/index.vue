@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -33,6 +34,9 @@ export default {
 
       this.artLogin = arts[Math.floor(Math.random()*arts.length)];
     }
-  }
+  },
+  computed: mapState([
+    'userGuess'
+  ])
 }
 </script>
