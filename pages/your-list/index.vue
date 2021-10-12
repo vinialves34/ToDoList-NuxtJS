@@ -29,9 +29,6 @@ import 'tippy.js/animations/scale.css';
 import { mapState } from 'vuex';
 
 export default {
-  beforeMount: function() {
-    this.$store.dispatch('loadList');
-  },
   mounted: function() {
     /** PanelList */
     tippy('#add-item', {

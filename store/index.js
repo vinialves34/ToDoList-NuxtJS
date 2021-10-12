@@ -1,51 +1,5 @@
 import { uuid } from "vue-uuid";
 export const state = () => ({
-    // listCards: [
-    //     {
-    //         "uuid": 1,
-    //         "title": "Minha lista",
-    //         "description": "Descrição da minha lista",
-    //         "items": [
-    //           {
-    //             "id": 1,
-    //             "text": "Desenvolver um sistema",
-    //             "status": 0
-    //           },
-    //           {
-    //             "id": 2,
-    //             "text": "Estudar Nuxt.Js",
-    //             "status": 1
-    //           },
-    //           {
-    //             "id": 3,
-    //             "text": "Estudar Tailwind Css",
-    //             "status": 0
-    //           }
-    //         ]
-    //     },
-    //     {
-    //         "uuid": 2,
-    //         "title": "Minha lista 2",
-    //         "description": "Descrição da minha lista",
-    //         "items": [
-    //           {
-    //             "id": 1,
-    //             "text": "Desenvolver um sistema",
-    //             "status": 0
-    //           },
-    //           {
-    //             "id": 2,
-    //             "text": "Estudar Nuxt.Js",
-    //             "status": 1
-    //           },
-    //           {
-    //             "id": 3,
-    //             "text": "Estudar Tailwind Css",
-    //             "status": 1
-    //           }
-    //         ]
-    //     }
-    // ]
     listCards: []
 });
 
@@ -57,7 +11,6 @@ export const mutations = {
         list.items = [];
 
         state.listCards.push(list);
-console.log(state.listCards);
         localStorage.setItem('list', JSON.stringify(state.listCards));
     },
 
@@ -73,6 +26,7 @@ console.log(state.listCards);
         });
 
         list[0].items = listData;
+        localStorage.setItem('list', JSON.stringify(state.listCards));
     },
 
     changeStatus(state, dataItem) {
@@ -84,6 +38,8 @@ console.log(state.listCards);
                 value.status = (data.currentStatus) ? 0 : 1;
             }
         });
+        
+        localStorage.setItem('list', JSON.stringify(state.listCards));
     },
 
     removeList(state, listUuid) {
@@ -93,7 +49,6 @@ console.log(state.listCards);
     },
 
     loadList(state, list) {
-        console.log(list);
         state.listCards = list;
     }
 };
