@@ -92,4 +92,11 @@ sw.*
 # Test Cypress
 cypress
 
+# Deploy Vercel
 .vercel
+
+# Yarn
+yarn.lock
+
+# Package
+package-lock.json
