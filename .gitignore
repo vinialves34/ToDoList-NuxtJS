@@ -89,7 +89,8 @@ sw.*
 # Vim swap files
 *.swp
 
-# Test Cypress
-cypress
-
+# Vercel file
 .vercel
+
+# Yarn file .lock
+yarn.lock
