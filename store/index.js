@@ -1,78 +1,92 @@
 import { uuid } from "vue-uuid";
+
 export const state = () => ({
-    listCards: []
+  listCards: []
 });
 
 export const mutations = {
-    createList(state, dataList) {
-        let list = JSON.parse(dataList);
+  createList(state, dataList) {
+    let list = JSON.parse(dataList);
 
-        list.uuid = uuid.v1();
-        list.items = [];
+    list.uuid = uuid.v1();
+    list.items = [];
 
-        state.listCards.push(list);
-        localStorage.setItem('list', JSON.stringify(state.listCards));
-    },
+    state.listCards.push(list);
+    localStorage.setItem('list', JSON.stringify(state.listCards));
+  },
 
-    createItem(state, dataItem) {
-        let item = JSON.parse(dataItem);
-        let list = state.listCards.filter(card => item.cardUuid == card.uuid);
-        let listData = list[0].items;
+  createItem(state, dataItem) {
+    let item = JSON.parse(dataItem);
+    let list = state.listCards.filter(card => item.cardUuid == card.uuid);
+    let listData = list[0].items;
 
-        listData.push({
-            "id": list[0].items.length + 1,
-            "text": item.text,
-            "status": 0
-        });
+    listData.push({
+      "id": list[0].items.length + 1,
+      "text": item.text,
+      "status": 0
+    });
 
-        list[0].items = listData;
-        localStorage.setItem('list', JSON.stringify(state.listCards));
-    },
+    list[0].items = listData;
+    localStorage.setItem('list', JSON.stringify(state.listCards));
+  },
 
-    changeStatus(state, dataItem) {
-        let data = JSON.parse(dataItem);
-        let list = state.listCards.filter(card => data.cardUuid == card.uuid);
+  changeStatus(state, dataItem) {
+    let data = JSON.parse(dataItem);
+    let list = state.listCards.filter(card => data.cardUuid == card.uuid);
 
-        list[0].items.forEach(value => {
-            if (value.id == data.itemId) {
-                value.status = (data.currentStatus) ? 0 : 1;
-            }
-        });
-        
-        localStorage.setItem('list', JSON.stringify(state.listCards));
-    },
+    list[0].items.forEach(value => {
+      if (value.id == data.itemId) {
+        value.status = (data.currentStatus) ? 0 : 1;
+      }
+    });
 
-    removeList(state, listUuid) {
-        let list = state.listCards.filter(card => listUuid != card.uuid);
-        state.listCards = list;
-        localStorage.setItem('list', JSON.stringify(state.listCards));
-    },
+    localStorage.setItem('list', JSON.stringify(state.listCards));
+  },
 
-    loadList(state, list) {
-        state.listCards = list;
-    }
+  removeList(state, listUuid) {
+    let list = state.listCards.filter(card => listUuid != card.uuid);
+    state.listCards = list;
+    localStorage.setItem('list', JSON.stringify(state.listCards));
+  },
+
+  removeItem(state, dataItem) {
+    let data = JSON.parse(dataItem);
+    let list = state.listCards.filter(card => data.cardUuid == card.uuid);
+    let newItems = list[0].items.filter(item => data.itemId != item.id);
+
+    list[0].items = newItems;
+    localStorage.setItem('list', JSON.stringify(state.listCards));
+  },
+
+  loadList(state, list) {
+    state.listCards = list;
+  }
 };
 
 export const actions = {
-    createList({ commit }, dataList) {
-        commit('createList', dataList);
-    },
+  createList({ commit }, dataList) {
+    commit('createList', dataList);
+  },
 
-    createItem({ commit }, dataItem) {
-        commit('createItem', dataItem);
-    },
+  createItem({ commit }, dataItem) {
+    commit('createItem', dataItem);
+  },
 
-    changeStatus({ commit }, dataItem) {
-        commit('changeStatus', dataItem);
-    },
+  changeStatus({ commit }, dataItem) {
+    commit('changeStatus', dataItem);
+  },
 
-    removeList({ commit }, listUuid) {
-        commit('removeList', listUuid);
-    },
+  removeList({ commit }, listUuid) {
+    commit('removeList', listUuid);
+  },
 
-    loadList({ commit }) {
-        if (localStorage.getItem('list')) {
-            commit('loadList', JSON.parse(localStorage.getItem('list')));
-        }
+  removeItem({ commit }, dataItem) {
+    commit('removeItem', dataItem);
+  },
+
+  loadList({ commit }) {
+    if (localStorage.getItem('list')) {
+      commit('loadList', JSON.parse(localStorage.getItem('list')));
     }
+  }
 };

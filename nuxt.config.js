@@ -48,7 +48,7 @@ export default {
 
   fontawesome: {
     icons: {
-      solid: ['faCheck', 'faTimes'],
+      solid: ['faCheck', 'faTimes', 'faTrash'],
     }
   },
 

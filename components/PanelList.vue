@@ -15,13 +15,18 @@
         <li v-for="item in card.items" :key="item.id" class="flex justify-between mt-1 mb-1">
           <span class="text-sm">{{ item.text }}</span>
 
-          <div class="flex items-center ml-1 cursor-pointer" @click="changeStatus(card.uuid, item.id, item.status)">
-            <span v-if="item.status" class="text-xs bg-green-400 text-white font-bold py-1 px-1 w-2/2 rounded m-1 md:m-0">Concluído</span>
-            <span v-else class="text-xs bg-yellow-400 text-white font-bold py-1 px-1 w-2/2 h-6 rounded m-1 md:m-0">Pendente</span>
+          <div class="flex items-center ml-2">
+            <div class="flex items-center mx-1 cursor-pointer" @click="changeStatus(card.uuid, item.id, item.status)">
+              <span v-if="item.status" class="text-xs bg-green-400 text-white font-bold py-1 px-1 w-2/2 rounded m-1 md:m-0">Concluído</span>
+              <span v-else class="text-xs bg-yellow-400 text-white font-bold py-1 px-1 w-2/2 h-6 rounded m-1 md:m-0">Pendente</span>
+            </div>
+            <button @click="removeItem(card.uuid, item.id)" class="bg-red-400 hover:bg-red-500 text-white font-bold rounded w-5 m-1 md:m-0">
+              <font-awesome-icon icon="trash" :style="{ color: 'white' }"/>
+            </button>
           </div>
         </li>
       </ul>
-      
+
       <hr class="mt-4" v-if="card.items.length">
 
       <form @submit.prevent="addItem(card.uuid)" class="mt-4 mb-4 flex justify-between">
@@ -29,16 +34,16 @@
           <input
             v-model="textItem"
             placeholder="Adicionar item"
-            type="text" 
+            type="text"
             class="block form-input border-gray-300 shadow-md py-1 rounded focus:outline-none focus:ring-1 focus:border-blue-300"
           >
         </div>
 
         <div>
-          <button 
+          <button
             id="add-item"
             type="submit"
-            class="bg-green-400 hover:bg-green-500 text-white font-bold py-1 px-2 rounded m-1 md:m-0" 
+            class="bg-green-400 hover:bg-green-500 text-white font-bold py-1 px-2 rounded m-1 md:m-0"
           >
             <font-awesome-icon icon="check" :style="{ color: 'white' }"/>
           </button>
@@ -71,7 +76,7 @@ export default {
         return false;
       }
 
-      let dataItem = {
+      const dataItem = {
         "cardUuid": cardUuid,
         "text": this.textItem.trim()
       }
@@ -81,12 +86,12 @@ export default {
     },
 
     changeStatus(cardUuid, itemId, status) {
-      let dataItem = {
+      const dataItem = {
         "cardUuid": cardUuid,
         "itemId": itemId,
         "currentStatus": status
       }
-      
+
       this.$store.dispatch('changeStatus', JSON.stringify(dataItem));
     },
 
@@ -103,6 +108,28 @@ export default {
       }).then(confirm => {
         if (confirm.value) {
           this.$store.dispatch('removeList', cardUuid);
+        }
+      });
+    },
+
+    removeItem(cardUuid, itemId) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Deseja realmente excluir este item?',
+        confirmButtonColor: '#34d399',
+        confirmButtonText: 'Confirmar',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#f87171'
+      }).then(confirm => {
+        if (confirm.value) {
+          const dataItem = {
+            "cardUuid": cardUuid,
+            "itemId": itemId
+          };
+
+          this.$store.dispatch('removeItem', JSON.stringify(dataItem));
         }
       });
     }
