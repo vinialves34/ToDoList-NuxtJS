@@ -21,7 +21,7 @@
               <span v-else class="text-xs bg-yellow-400 text-white font-bold py-1 px-1 w-2/2 h-6 rounded m-1 md:m-0">Pendente</span>
             </div>
             <button @click="removeItem(card.uuid, item.id)" class="bg-red-400 hover:bg-red-500 text-white font-bold rounded w-5 m-1 md:m-0">
-              <font-awesome-icon icon="trash" :style="{ color: 'white' }"/>
+              <font-awesome-icon icon="times" :style="{ color: 'white' }"/>
             </button>
           </div>
         </li>
